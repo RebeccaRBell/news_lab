@@ -5,14 +5,13 @@ import StoryList from '../components/StoryList';
 const MainContainer = () => {
 
         const [stories, setStories] = useState([]);
-        const [searchesStories, setSearchedStories] = useState([])
-
+        const [searchedStories, setSearchedStories] = useState([])
 
         useEffect(() => {
           fetch('https://hacker-news.firebaseio.com/v0/topstories.json')
           .then(results => results.json())
           .then(data => {
-                const storyPromises = data.slice(0,20).map((storyId) => {
+                const storyPromises = data.slice(0,10).map((storyId) => {
           return fetch(`https://hacker-news.firebaseio.com/v0/item/${storyId}.json`)
           .then(res => res.json())
           })
@@ -20,15 +19,16 @@ const MainContainer = () => {
           .then((data) => {setStories(data)})
           })
 });
-        const searchResults = function(searchValue){
-                const results = stories.filter(searchValue);
-                console.log(results)
-                setSearchedStories(results);
-        }
+      const searchResults = function(searchValue){
+                const checkStories = stories.filter((story => story.title.includes(searchValue)))
+                setSearchedStories(checkStories);
+                console.log(checkStories);
+      }
+     
    
   return(
         <div>
-        <ul>{stories ? <StoryList  stories={stories} searchResults={searchResults}/> : null }</ul>
+        <ul>{searchedStories ? <StoryList  stories={searchedStories} searchResults={searchResults} /> : stories ?<StoryList  stories={stories} searchResults={searchResults} /> : null } </ul>
         </div>
   )
   }

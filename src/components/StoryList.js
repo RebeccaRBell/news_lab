@@ -13,6 +13,7 @@ const StoryList = ({stories, searchResults }) => {
           searchResults(searchValue);
         }
 
+
   return(
         <div>
         <form>
