@@ -11,7 +11,7 @@ const MainContainer = () => {
           fetch('https://hacker-news.firebaseio.com/v0/topstories.json')
           .then(results => results.json())
           .then(data => {
-                const storyPromises = data.slice(0,10).map((storyId) => {
+                const storyPromises = data.slice(0,20).map((storyId) => {
           return fetch(`https://hacker-news.firebaseio.com/v0/item/${storyId}.json`)
           .then(res => res.json())
           })
