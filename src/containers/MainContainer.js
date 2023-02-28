@@ -5,7 +5,7 @@ import StoryList from '../components/StoryList';
 const MainContainer = () => {
 
         const [stories, setStories] = useState([]);
-        const [searchedStories, setSearchedStories] = useState([])
+        const [searchedStories, setSearchedStories] = useState(null);
 
         useEffect(() => {
           fetch('https://hacker-news.firebaseio.com/v0/topstories.json')
